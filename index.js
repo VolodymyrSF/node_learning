@@ -14,6 +14,7 @@ async function learn(){
             await fs.mkdir(folderPath,{recursive:true})
             for (const fileName of filesNames){
                 await fs.writeFile(path.join(folderPath,fileName),'Sho tu halava?')
+
             }
         }
 
