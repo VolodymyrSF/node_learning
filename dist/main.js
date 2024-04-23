@@ -6,50 +6,13 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
 const api_error_1 = require("./api-error");
 const fs_service_1 = require("./fs.service");
+const user_router_1 = require("./routers/user.router");
 const app = (0, express_1.default)();
 app.use(express_1.default.json());
 app.use(express_1.default.urlencoded({ extended: true }));
-app.get("/users", async (req, res) => {
-    try {
-        const users = await (0, fs_service_1.reader)();
-        res.json(users);
-    }
-    catch (e) {
-        res.status(400).json(e.message);
-    }
-});
-app.post("/users", async (req, res) => {
-    try {
-        const { name, email, password } = req.body;
-        const users = await (0, fs_service_1.reader)();
-        const newUser = {
-            id: users[users.length - 1].id + 1,
-            name,
-            email,
-            password,
-        };
-        users.push(newUser);
-        await (0, fs_service_1.writer)(users);
-        res.status(201).json(newUser);
-    }
-    catch (e) {
-        res.status(400).json(e.message);
-    }
-});
-app.get("/users/:userId", async (req, res, next) => {
-    try {
-        const userId = Number(req.params.userId);
-        const users = await (0, fs_service_1.reader)();
-        const user = users.find((user) => user.id === userId);
-        if (!user) {
-            throw new api_error_1.ApiError("user not found", 404);
-        }
-        res.json(user);
-    }
-    catch (e) {
-        next(e);
-    }
-});
+app.use("/users", user_router_1.userRouter);
+app.use("/users", user_router_1.userRouter);
+app.use("/users", user_router_1.userRouter);
 app.put("/users/:userId", async (req, res, next) => {
     try {
         const { name, email, password } = req.body;
