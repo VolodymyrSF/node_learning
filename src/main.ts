@@ -1,5 +1,5 @@
-const express = require('express')
-const {reader, writer} = require('./fs.service')
+import express from 'express'
+import {reader, writer} from './fs.service'
 
 const app = express();
 

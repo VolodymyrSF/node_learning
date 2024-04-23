@@ -1,5 +1,5 @@
-const fs = require('node:fs/promises');
-const path = require('node:path');
+import fs from 'node:fs/promises'
+import path from 'node:path'
 
 const filePath = path.join(process.cwd(), 'db.json');
 
@@ -12,4 +12,4 @@ const writer = async (users) => {
     await fs.writeFile(filePath, JSON.stringify(users))
 }
 
-module.exports = {reader, writer};
+export {reader, writer};
