@@ -8,8 +8,11 @@ class UserService {
   public async createUser(dto: Partial<IUser>): Promise<IUser> {
     return await userRepository.createUser(dto);
   }
-  public async getById(id: Partial<IUser>): Promise<IUser> {
+  public async getById(id: number): Promise<IUser> {
     return await userRepository.getById(id);
+  }
+  public async putById(data: Partial<IUser>, id: number) {
+    return await userRepository.putById(data, id);
   }
 }
 

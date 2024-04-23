@@ -11,29 +11,6 @@ app.use(express.urlencoded({ extended: true }));
 
 app.use("/users", userRouter);
 app.use("/users", userRouter);
-app.use("/users", userRouter);
-
-app.put(
-  "/users/:userId",
-  async (req: Request, res: Response, next: NextFunction) => {
-    try {
-      const { name, email, password } = req.body;
-      const userId = Number(req.params.userId);
-      const users = await reader();
-
-      const index = users.findIndex((user) => user.id === userId);
-      if (index === -1) {
-        throw new ApiError("user not found", 404);
-      }
-      users[index] = { ...users[index], name, email, password };
-      await writer(users);
-
-      res.status(201).json(users[index]);
-    } catch (e) {
-      next(e);
-    }
-  },
-);
 
 app.delete(
   "/users/:userId",

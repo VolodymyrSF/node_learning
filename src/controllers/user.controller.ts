@@ -24,11 +24,21 @@ class UserController {
   }
   public async getById(req: Request, res: Response, next: NextFunction) {
     try {
-      const id = Number(req.params) as Partial<IUser>;
-      const user = await userService.getById(id);
+      const { id } = req.params;
+      const user = await userService.getById(+id);
       if (!user) {
         throw new ApiError("user not found", 404);
       }
+      res.status(201).json(user);
+    } catch (e) {
+      next(e);
+    }
+  }
+  public async putById(req: Request, res: Response, next: NextFunction) {
+    try {
+      const data = req.body as Partial<IUser>;
+      const { id } = req.params;
+      const user = await userService.putById(data, +id);
       res.status(201).json(user);
     } catch (e) {
       next(e);
