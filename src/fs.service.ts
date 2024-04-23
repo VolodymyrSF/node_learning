@@ -1,15 +1,17 @@
-import fs from 'node:fs/promises'
-import path from 'node:path'
+import fs from "node:fs/promises";
+import path from "node:path";
 
-const filePath = path.join(process.cwd(), 'db.json');
+import { IUser } from "./user.interface";
 
-const reader = async () => {
-    const users = await fs.readFile(filePath, 'utf-8');
-    return JSON.parse(users);
-}
+const filePath = path.join(process.cwd(), "db.json");
 
-const writer = async (users) => {
-    await fs.writeFile(filePath, JSON.stringify(users))
-}
+const reader = async (): Promise<IUser[]> => {
+  const users = await fs.readFile(filePath, "utf-8");
+  return JSON.parse(users);
+};
 
-export {reader, writer};
+const writer = async (users: IUser[]): Promise<void> => {
+  await fs.writeFile(filePath, JSON.stringify(users));
+};
+
+export { reader, writer };
