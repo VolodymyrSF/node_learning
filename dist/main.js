@@ -9,7 +9,6 @@ const app = (0, express_1.default)();
 app.use(express_1.default.json());
 app.use(express_1.default.urlencoded({ extended: true }));
 app.use("/users", user_router_1.userRouter);
-app.use("/users", user_router_1.userRouter);
 app.use("*", (err, req, res, next) => {
     return res.status(err.status || 500).json(err.message);
 });
