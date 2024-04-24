@@ -16,7 +16,7 @@ class UserController {
   public async createUser(req: Request, res: Response, next: NextFunction) {
     try {
       const dto = req.body as Partial<IUser>;
-      const newUser = userService.createUser(dto);
+      const newUser = await userService.createUser(dto);
       res.status(201).json(newUser);
     } catch (e) {
       next(e);
@@ -48,7 +48,7 @@ class UserController {
     try {
       const { id } = req.params;
       const users = await userService.deleteById(+id);
-      res.status(204).json(users);
+      res.status(201).json(users);
     } catch (e) {
       next(e);
     }
