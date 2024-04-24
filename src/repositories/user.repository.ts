@@ -39,6 +39,17 @@ class UserRepository {
     await writer(users);
     return newPutUser;
   }
+  public async deleteById(id: number): Promise<IUser[]> {
+    const users = await reader();
+    const index = users.findIndex((user) => user.id === id);
+    if (index === -1) {
+      throw new ApiError("user not found", 404);
+    }
+    users.splice(index, 1);
+    await writer(users);
+    const newUsers = await reader();
+    return newUsers;
+  }
 }
 
 export const userRepository = new UserRepository();

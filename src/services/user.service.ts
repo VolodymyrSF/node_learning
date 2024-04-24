@@ -14,6 +14,9 @@ class UserService {
   public async putById(data: Partial<IUser>, id: number) {
     return await userRepository.putById(data, id);
   }
+  public async deleteById(id: number): Promise<IUser[]> {
+    return await userRepository.deleteById(id);
+  }
 }
 
 export const userService = new UserService();

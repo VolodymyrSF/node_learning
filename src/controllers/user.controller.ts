@@ -44,6 +44,15 @@ class UserController {
       next(e);
     }
   }
+  public async deleteById(req: Request, res: Response, next: NextFunction) {
+    try {
+      const { id } = req.params;
+      const users = await userService.deleteById(+id);
+      res.status(204).json(users);
+    } catch (e) {
+      next(e);
+    }
+  }
 }
 
 export const userController = new UserController();
