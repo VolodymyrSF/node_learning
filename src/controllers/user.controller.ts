@@ -25,7 +25,7 @@ class UserController {
   public async getById(req: Request, res: Response, next: NextFunction) {
     try {
       const { id } = req.params;
-      const user = await userService.getById(+id);
+      const user = await userService.getById(id);
       if (!user) {
         throw new ApiError("user not found", 404);
       }
@@ -38,7 +38,7 @@ class UserController {
     try {
       const data = req.body as Partial<IUser>;
       const { id } = req.params;
-      const user = await userService.putById(data, +id);
+      const user = await userService.putById(data, id);
       res.status(201).json(user);
     } catch (e) {
       next(e);
@@ -47,7 +47,7 @@ class UserController {
   public async deleteById(req: Request, res: Response, next: NextFunction) {
     try {
       const { id } = req.params;
-      const users = await userService.deleteById(+id);
+      const users = await userService.deleteById(id);
       res.status(201).json(users);
     } catch (e) {
       next(e);
