@@ -1,8 +1,8 @@
 import { NextFunction, Request, Response } from "express";
 
-import { ApiError } from "../api-error";
+import { ApiError } from "../errors/api-error";
+import { IUser } from "../interfaces/user.interface";
 import { userService } from "../services/user.service";
-import { IUser } from "../user.interface";
 
 class UserController {
   public async getUsers(req: Request, res: Response, next: NextFunction) {
@@ -47,8 +47,8 @@ class UserController {
   public async deleteById(req: Request, res: Response, next: NextFunction) {
     try {
       const { id } = req.params;
-      const users = await userService.deleteById(id);
-      res.status(201).json(users);
+      await userService.deleteById(id);
+      res.sendStatus(204);
     } catch (e) {
       next(e);
     }

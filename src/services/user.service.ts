@@ -1,6 +1,6 @@
-import { ApiError } from "../api-error";
+import { ApiError } from "../errors/api-error";
+import { IUser } from "../interfaces/user.interface";
 import { userRepository } from "../repositories/user.repository";
-import { IUser } from "../user.interface";
 
 class UserService {
   public async getUsers(): Promise<IUser[]> {
@@ -23,7 +23,7 @@ class UserService {
     }
     return await userRepository.putById(data, id);
   }
-  public async deleteById(id: string): Promise<IUser[]> {
+  public async deleteById(id: string): Promise<void> {
     const user = await userRepository.getById(id);
     if (!user) {
       throw new ApiError("user not found", 404);

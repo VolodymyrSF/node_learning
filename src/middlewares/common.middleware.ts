@@ -1,10 +1,9 @@
 import { NextFunction, Request, Response } from "express";
 import { isObjectIdOrHexString } from "mongoose";
 
-import { ApiError } from "../api-error";
-import { IUser } from "../user.interface";
-import { ObjectSchema } from "../validators/user.validator";
-import { UpdateSchema } from "../validators/userUpdate.validator";
+import { ApiError } from "../errors/api-error";
+import { IUser } from "../interfaces/user.interface";
+import { ObjectSchema, UpdateSchema } from "../validators/user.validator";
 
 class CommonMiddleware {
   public isIdValid(req: Request, res: Response, next: NextFunction) {

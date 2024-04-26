@@ -1,5 +1,5 @@
+import { IUser } from "../interfaces/user.interface";
 import { User } from "../models/user.model";
-import { IUser } from "../user.interface";
 
 class UserRepository {
   public async getUsers(): Promise<IUser[]> {
@@ -16,9 +16,8 @@ class UserRepository {
       returnDocument: "after",
     });
   }
-  public async deleteById(id: string): Promise<IUser[]> {
+  public async deleteById(id: string): Promise<void> {
     await User.deleteOne({ _id: id });
-    return await User.find({});
   }
 }
 
