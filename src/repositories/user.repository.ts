@@ -19,6 +19,9 @@ class UserRepository {
   public async deleteById(id: string): Promise<void> {
     await User.deleteOne({ _id: id });
   }
+  public async getByParams(params: Partial<IUser>): Promise<IUser> {
+    return await User.findOne(params);
+  }
 }
 
 export const userRepository = new UserRepository();

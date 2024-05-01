@@ -6,11 +6,11 @@ import { commonMiddleWare } from "../middlewares/common.middleware";
 const router = Router();
 
 router.get("/", userController.getUsers);
-router.post(
-  "/",
-  commonMiddleWare.isCreatedDataValid,
-  userController.createUser,
-);
+// router.post(
+//   "/",
+//   commonMiddleWare.isCreatedDataValid,
+//   userController.createUser,
+// );
 
 router.get("/:id", commonMiddleWare.isIdValid, userController.getById);
 router.put(
